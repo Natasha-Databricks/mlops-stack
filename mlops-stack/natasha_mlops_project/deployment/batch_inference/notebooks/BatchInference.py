@@ -87,5 +87,8 @@ ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 from predict import predict_batch
 
+tt = spark.read.table(input_table_name).limit(5)
+tt.show()
+
 predict_batch(spark, model_uri, input_table_name, output_table_name, model_version, ts)
 dbutils.notebook.exit(output_table_name)
