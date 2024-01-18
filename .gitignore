@@ -5,13 +5,10 @@
 # local bundle files
 **/.databricks/*
 
-mlops-stacks-using-bundle.iml
-mlops-stacks-using-bundle.ipr
-mlops-stacks-using-bundle.iws
 *.hcl
 .idea/
 .vscode/
 __pycache__/
 .cache
 *.pyc
-mlops-stack.iml
+mlops-stacks.iml

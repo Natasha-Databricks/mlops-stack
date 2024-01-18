@@ -25,6 +25,9 @@ DEFAULT_PARAM_VALUES = {
     "input_read_user_group": "users",
     "input_include_feature_store": "no",
     "input_include_mlflow_recipes": "no",
+    "input_include_models_in_unity_catalog": "no",
+    "input_schema_name": "schema_name",
+    "input_unity_catalog_read_user_group": "account users",
 }
 DEFAULT_PARAMS_AZURE = {
     "input_cloud": "azure",
@@ -86,7 +89,7 @@ def test_no_template_strings_after_param_substitution(generated_project_dir):
 
 
 def test_no_databricks_workspace_urls():
-    # Test that there are no accidental hardcoded Databricks workspace URLs included in stack source files
+    # Test that there are no accidental hardcoded Databricks workspace URLs included in source files
     template_dir = pathlib.Path(__file__).parent.parent / "template"
     test_paths = [os.path.join(template_dir, path) for path in paths(template_dir)]
     assert_no_disallowed_strings_in_files(
@@ -159,9 +162,10 @@ def test_generate_project_with_default_values(
     cicd_platform,
     include_feature_store,
     include_mlflow_recipes,
+    include_models_in_unity_catalog,
 ):
     """
-    Asserts the default parameter values for the stack. The project name and experiment
+    Asserts the default parameter values. The project name and experiment
     parent directory are excluded from this test as they covered in other tests. If this test fails
     due to an update of the default values, please do the following checks:
     - The default param value constants in this test are up to date.
@@ -197,9 +201,10 @@ def test_generate_project_check_delta_output(
     cicd_platform,
     include_feature_store,
     include_mlflow_recipes,
+    include_models_in_unity_catalog,
 ):
     """
-    Asserts the behavior of Delta Table-related artifacts when generating Stacks.
+    Asserts the behavior of Delta Table-related artifacts when generating MLOps Stacks.
     """
     context = {
         "input_project_name": TEST_PROJECT_NAME,
@@ -208,6 +213,7 @@ def test_generate_project_check_delta_output(
         "input_cicd_platform": cicd_platform,
         "input_include_feature_store": include_feature_store,
         "input_include_mlflow_recipes": include_mlflow_recipes,
+        "input_include_models_in_unity_catalog": include_models_in_unity_catalog,
     }
     generate(tmpdir, databricks_cli, context=context)
     delta_notebook_path = (
@@ -232,9 +238,10 @@ def test_generate_project_check_feature_store_output(
     cicd_platform,
     include_feature_store,
     include_mlflow_recipes,
+    include_models_in_unity_catalog,
 ):
     """
-    Asserts the behavior of feature store-related artifacts when generating Stacks.
+    Asserts the behavior of feature store-related artifacts when generating MLOps Stacks.
     """
     context = {
         "input_project_name": TEST_PROJECT_NAME,
@@ -243,6 +250,7 @@ def test_generate_project_check_feature_store_output(
         "input_cicd_platform": cicd_platform,
         "input_include_feature_store": include_feature_store,
         "input_include_mlflow_recipes": include_mlflow_recipes,
+        "input_include_models_in_unity_catalog": include_models_in_unity_catalog,
     }
     generate(tmpdir, databricks_cli, context=context)
     fs_notebook_path = (
@@ -267,9 +275,10 @@ def test_generate_project_check_recipe_output(
     cicd_platform,
     include_feature_store,
     include_mlflow_recipes,
+    include_models_in_unity_catalog,
 ):
     """
-    Asserts the behavior of MLflow Recipes-related artifacts when generating Stacks.
+    Asserts the behavior of MLflow Recipes-related artifacts when generating MLOps Stacks.
     """
     context = {
         "input_project_name": TEST_PROJECT_NAME,
@@ -278,6 +287,7 @@ def test_generate_project_check_recipe_output(
         "input_cicd_platform": cicd_platform,
         "input_include_feature_store": include_feature_store,
         "input_include_mlflow_recipes": include_mlflow_recipes,
+        "input_include_models_in_unity_catalog": include_models_in_unity_catalog,
     }
     generate(tmpdir, databricks_cli, context=context)
     recipe_notebook_path = (

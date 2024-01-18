@@ -1,12 +1,16 @@
 # ML Pipeline Structure and Devloop
-The default stack contains an ML pipeline with CI/CD workflows to test and deploy
+MLOps Stacks contains an ML pipeline with CI/CD workflows to test and deploy
 automated model training and batch inference jobs across your dev, staging, and prod Databricks
 workspaces.
 
 ## Iterating on ML code
-Data scientists can iterate on ML code and file pull requests (PRs), which will trigger unit
-tests and integration tests that run model training code and any other desired
-validation (schema validation, feature testing, etc) in an isolated staging Databricks workspace:
+Data scientists can iterate on ML code and file pull requests (PRs):
+
+<img src="doc-images/mlops-stack-dev.png" style="width: 700px">
+
+This will trigger unit tests and integration tests that run model training 
+code and any other desired validation (schema validation, feature testing, etc) 
+in an isolated staging Databricks workspace:
 
 <img src="doc-images/mlops-stack-pr.png" style="width: 700px">
 
@@ -31,5 +35,7 @@ in production:
 Here's the whole pipeline in one picture:
 
 <img src="doc-images/mlops-stack-summary.png">
+
+For more details on MLOps on Databricks Lakehouse, please read [The Big Book of MLOps: Second Edition](https://www.databricks.com/resources/ebook/the-big-book-of-mlops).
 
 [Back to README](README.md)
