@@ -4,7 +4,7 @@
 #
 # This notebook shows an example of a Model Training pipeline using Delta tables.
 # It is configured and can be executed as the "Train" task in the model_training_job workflow defined under
-# ``mlops_demo_jan24/assets/model-workflow-asset.yml``
+# ``mlops_flatiron/assets/model-workflow-asset.yml``
 #
 # Parameters:
 # * env (required):                 - Environment the notebook is run in (staging, or prod). Defaults to "staging".
@@ -53,12 +53,12 @@ dbutils.widgets.text(
 # MLflow experiment name.
 dbutils.widgets.text(
     "experiment_name",
-    f"/dev-mlops-demo-jan24-experiment",
+    f"/dev-mlops-flatiron-experiment",
     label="MLflow experiment name",
 )
 # Unity Catalog registered model name to use for the trained model.
 dbutils.widgets.text(
-    "model_name", "dev.natasha_mlops.mlops-demo-jan24-model", label="Full (Three-Level) Model Name"
+    "model_name", "dev.natasha_mlops.mlops-flatiron-model", label="Full (Three-Level) Model Name"
 )
 
 # COMMAND ----------
@@ -141,7 +141,7 @@ input_example = X_train.iloc[[0]]
 # Log the trained model with MLflow
 mlflow.lightgbm.log_model(
     model, 
-    artifact_path="lgb_model_mlops_test", 
+    artifact_path="lgb_model", 
     # The signature is automatically inferred from the input example and its predicted output.
     input_example=input_example,    
     registered_model_name=model_name
