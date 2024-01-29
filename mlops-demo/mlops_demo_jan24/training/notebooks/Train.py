@@ -141,7 +141,7 @@ input_example = X_train.iloc[[0]]
 # Log the trained model with MLflow
 mlflow.lightgbm.log_model(
     model, 
-    artifact_path="lgb_model", 
+    artifact_path="lgb_model_mlops_test", 
     # The signature is automatically inferred from the input example and its predicted output.
     input_example=input_example,    
     registered_model_name=model_name
