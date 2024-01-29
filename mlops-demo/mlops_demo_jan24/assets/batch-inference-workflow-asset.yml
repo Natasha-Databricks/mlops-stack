@@ -22,7 +22,7 @@ resources:
             notebook_path: ../deployment/batch_inference/notebooks/BatchInference.py
             base_parameters:
               env: ${bundle.target}
-              input_table_name: taxi_scoring_sample  # TODO: create input table for inference
+              input_table_name: ${bundle.target}.natasha_mlops.nyc_taxi  # TODO: create input table for inference
               output_table_name: ${bundle.target}.natasha_mlops.predictions
               model_name: ${bundle.target}.natasha_mlops.${var.model_name}
               # git source information of current ML asset deployment. It will be persisted as part of the workflow run
